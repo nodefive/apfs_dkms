@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+# Add, build, and install the module via DKMS
+dkms add -m apfs -v 1.0
+dkms build -m apfs -v 1.0
+dkms install -m apfs -v 1.0
+# Load the module into the current running kernel immediately
+modprobe apfs || true
+exit 0

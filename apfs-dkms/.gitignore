@@ -1,0 +1,7 @@
+# Ignore text editor temp files
+*~
+*.swp
+
+# Ignore root .deb files but allow the releases folder
+*.deb
+!releases/*.deb

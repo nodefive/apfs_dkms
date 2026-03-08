@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+# Unload the module and remove it from DKMS
+rmmod apfs || true
+dkms remove -m apfs -v 1.0 --all || true
+exit 0
