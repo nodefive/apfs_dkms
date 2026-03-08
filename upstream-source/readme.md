@@ -89,7 +89,7 @@ nano ~/Desktop/apfs-dkms-pkg/DEBIAN/control
 Package: apfs-dkms
 Version: 1.0
 Architecture: all
-Maintainer: unl0cker
+Maintainer: eafer
 Depends: dkms, linux-headers-generic, build-essential
 Description: Native APFS kernel module with DKMS support for seamless GUI mounting.
 ```
