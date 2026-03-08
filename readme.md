@@ -1,6 +1,6 @@
-# APFS DKMS for Ubuntu
+# APFS DKMS for Linux
 
-A plug-and-play Dynamic Kernel Module Support (DKMS) package for Apple File System (APFS) on Ubuntu/Debian. 
+A plug-and-play Dynamic Kernel Module Support (DKMS) package for Apple File System (APFS) on Linux. 
 
 This repository provides a pre-configured `.deb` package that builds the APFS kernel module directly into your Linux kernel. Unlike userspace FUSE drivers (`apfs-fuse`), this kernel-level integration allows seamless mounting and unmounting of APFS drives directly through standard GUI file managers (like GNOME Files/Nautilus) without throwing `udisks2` errors.
 
