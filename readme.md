@@ -74,13 +74,13 @@ sudo apt remove apfs-dkms
 
 ---
 
-# Signing the APFS Kernel Module for Secure Boot
+## Signing the APFS Kernel Module for Secure Boot
 
 This guide covers the installation and digital signing of the driver. This is required for Linux systems with **Secure Boot** enabled to prevent "module verification failed" errors and ensure the driver loads successfully.
 
 ---
 
-## Prerequisites
+### Prerequisites
 Ensure you have the necessary tools installed for building and signing modules:
 ```bash
 sudo apt update
@@ -89,7 +89,7 @@ sudo apt install openssl kmod mokutil zstd dkms
 
 ---
 
-## 1. Installation
+### 1. Installation
 Install the APFS driver from the `.deb` package.
 
 1. Download the latest `.deb` from [apfs_dkms](https://github.com/nodefive/apfs_dkms).
@@ -106,7 +106,7 @@ Install the APFS driver from the `.deb` package.
 
 ---
 
-## 2. Generate and Enroll the Signing Key (MOK)
+### 2. Generate and Enroll the Signing Key (MOK)
 You must create a Machine Owner Key (MOK) that your computer's BIOS/UEFI will trust.
 
 1. **Generate the Key Pair:**
@@ -128,7 +128,7 @@ You must create a Machine Owner Key (MOK) that your computer's BIOS/UEFI will tr
 
 ---
 
-## 3. Signing the Module
+### 3. Signing the Module
 Modern Linux distributions compress modules with `.zst`. To avoid corrupting the file, you must decompress it, sign it, and re-compress it.
 
 1. **Find the module path:**
@@ -155,7 +155,7 @@ Modern Linux distributions compress modules with `.zst`. To avoid corrupting the
 
 ---
 
-## 4. Final Activation & Verification
+### 4. Final Activation & Verification
 Tell the kernel to update its database and load the signed driver.
 
 1. **Update Dependencies:**
@@ -175,7 +175,7 @@ Tell the kernel to update its database and load the signed driver.
 
 ---
 
-### Final consideration - Kernel Updates
+#### Final consideration - Kernel Updates
 If you update your Linux kernel, you will need to repeat **Step 3** to sign the module for the new kernel version. KEEP your .priv key!
 
     **MOK.priv** (The Private Key): Every time your system downloads a Linux kernel update, DKMS will automatically rebuild a fresh, unsigned version of the APFS module for that new kernel. You will need this .priv file to sign the new module. If you delete it, you will have to generate a completely new key, reboot, and go through the blue-screen BIOS enrollment process all over again.
