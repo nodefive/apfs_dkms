@@ -14,7 +14,9 @@ If you just want to install the driver and mount your drives seamlessly:
 2. Install it using `dpkg`:
 3. 
    ```bash
-   sudo dpkg -i apfs-dkms-pkg.deb
+   sudo apt update
+   sudo apt install dkms linux-headers-generic build-essential
+   sudo dpkg -i apfs-dkms.deb
    ```
 
    *Note: Installation takes a few moments as DKMS will compile the module against your active kernel in the background.*
