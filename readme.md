@@ -147,28 +147,28 @@ Modern Linux distributions compress modules with `.zst`. To avoid corrupting the
 ### 4. Final Activation & Verification
 Tell the kernel to update its database and load the signed driver.
 
-**Update Dependencies:**
+1. **Update Dependencies:**
    ```bash
    sudo depmod -a
    ```
 
-**Load the Module:**
+2. **Load the Module:**
    ```bash
    sudo modprobe apfs
    ```
 
-**Verify Success:**
+3. **Verify Success:**
    * Check for the signer: `modinfo apfs | grep -E "signer|sig_key"`
    * Verify it is active: `lsmod | grep apfs`
    * Check logs for errors: `sudo dmesg | tail -n 10 | grep apfs`
 
 
 ### Final consideration - Kernel Updates
-If you update your Linux kernel, you will need to repeat **Step 3 and 4** to sign the module for the new kernel version, so **KEEP** your .priv key!
+If you update your Linux kernel, you will need to repeat **Step 3 and 4 _(resign and reactivate)_** to sign the module for the new kernel version, so **KEEP** your .priv key!
 
-    **MOK.priv** (The Private Key): Every time your system downloads a Linux kernel update, DKMS will automatically rebuild a fresh, unsigned version of the APFS module for that new kernel. You will need this .priv file to sign the new module. If you delete it, you will have to generate a completely new key, reboot, and go through the blue-screen BIOS enrollment process all over again.
+**MOK.priv** (The Private Key): Every time your system downloads a Linux kernel update, DKMS will automatically rebuild a fresh, unsigned version of the APFS module for that new kernel. You will need this .priv file to sign the new module. If you delete it, you will have to generate a completely new key, reboot, and go through the blue-screen BIOS enrollment process all over again.
 
-    **MOK.der** (The Public Key): This key is already safely injected into your motherboard's firmware. While you don't strictly need it to sign future modules, you should keep it in case you ever want to cleanly remove (un-enroll) this specific key from your BIOS using mokutil --delete.
+**MOK.der** (The Public Key): This key is already safely injected into your motherboard's firmware. While you don't strictly need it to sign future modules, you should keep it in case you ever want to cleanly remove (un-enroll) this specific key from your BIOS using mokutil --delete.
 
 ### Security Warning
 
