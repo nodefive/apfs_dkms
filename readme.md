@@ -111,7 +111,7 @@ You must create a Machine Owner Key (MOK) that your computer's BIOS/UEFI will tr
    ```bash
    sudo mokutil --import MOK.der
    ```
-   *Create a temporary password when prompted.*
+   *Create a temporary password when prompted. Keep this password for future uses!*
 
 3. **Reboot and Enroll:**
    * Restart your PC.
@@ -147,24 +147,24 @@ Modern Linux distributions compress modules with `.zst`. To avoid corrupting the
 ### 4. Final Activation & Verification
 Tell the kernel to update its database and load the signed driver.
 
-1. **Update Dependencies:**
+**Update Dependencies:**
    ```bash
    sudo depmod -a
    ```
 
-2. **Load the Module:**
+**Load the Module:**
    ```bash
    sudo modprobe apfs
    ```
 
-3. **Verify Success:**
+**Verify Success:**
    * Check for the signer: `modinfo apfs | grep -E "signer|sig_key"`
    * Verify it is active: `lsmod | grep apfs`
    * Check logs for errors: `sudo dmesg | tail -n 10 | grep apfs`
 
 
 ### Final consideration - Kernel Updates
-If you update your Linux kernel, you will need to repeat **Step 3** to sign the module for the new kernel version. KEEP your .priv key!
+If you update your Linux kernel, you will need to repeat **Step 3 and 4** to sign the module for the new kernel version, so **KEEP** your .priv key!
 
     **MOK.priv** (The Private Key): Every time your system downloads a Linux kernel update, DKMS will automatically rebuild a fresh, unsigned version of the APFS module for that new kernel. You will need this .priv file to sign the new module. If you delete it, you will have to generate a completely new key, reboot, and go through the blue-screen BIOS enrollment process all over again.
 
